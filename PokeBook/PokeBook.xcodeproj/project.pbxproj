@@ -19,6 +19,10 @@
 		E90A119C2ABCF1F6001C8D4F /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A119B2ABCF1F6001C8D4F /* Pokemon.swift */; };
 		E90A119E2ABCF299001C8D4F /* PokemonsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A119D2ABCF299001C8D4F /* PokemonsList.swift */; };
 		E90A11A22ABCF65F001C8D4F /* PokemonTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11A12ABCF65F001C8D4F /* PokemonTableCell.swift */; };
+		E90A11A52ABD00A3001C8D4F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E90A11A42ABD00A3001C8D4F /* Alamofire */; };
+		E90A11A72ABD00E5001C8D4F /* PokemonsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11A62ABD00E5001C8D4F /* PokemonsListInteractor.swift */; };
+		E90A11A92ABD0A6D001C8D4F /* PokemonListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11A82ABD0A6D001C8D4F /* PokemonListPresenter.swift */; };
+		E90A11AB2ABDBD53001C8D4F /* PokemonListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11AA2ABDBD53001C8D4F /* PokemonListRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +58,9 @@
 		E90A119B2ABCF1F6001C8D4F /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		E90A119D2ABCF299001C8D4F /* PokemonsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsList.swift; sourceTree = "<group>"; };
 		E90A11A12ABCF65F001C8D4F /* PokemonTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonTableCell.swift; sourceTree = "<group>"; };
+		E90A11A62ABD00E5001C8D4F /* PokemonsListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsListInteractor.swift; sourceTree = "<group>"; };
+		E90A11A82ABD0A6D001C8D4F /* PokemonListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListPresenter.swift; sourceTree = "<group>"; };
+		E90A11AA2ABDBD53001C8D4F /* PokemonListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E90A11922ABCE386001C8D4F /* SnapKit in Frameworks */,
+				E90A11A52ABD00A3001C8D4F /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +180,7 @@
 		E90A11972ABCF07D001C8D4F /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				E90A11A62ABD00E5001C8D4F /* PokemonsListInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -188,6 +197,7 @@
 		E90A11992ABCF0E3001C8D4F /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				E90A11AA2ABDBD53001C8D4F /* PokemonListRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -195,6 +205,7 @@
 		E90A119A2ABCF0EB001C8D4F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				E90A11A82ABD0A6D001C8D4F /* PokemonListPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -217,6 +228,7 @@
 			name = PokeBook;
 			packageProductDependencies = (
 				E90A11912ABCE386001C8D4F /* SnapKit */,
+				E90A11A42ABD00A3001C8D4F /* Alamofire */,
 			);
 			productName = PokeBook;
 			productReference = E90A115D2ABCE302001C8D4F /* PokeBook.app */;
@@ -292,6 +304,7 @@
 			mainGroup = E90A11542ABCE302001C8D4F;
 			packageReferences = (
 				E90A11902ABCE386001C8D4F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				E90A11A32ABD00A3001C8D4F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = E90A115E2ABCE302001C8D4F /* Products */;
 			projectDirPath = "";
@@ -337,10 +350,13 @@
 			files = (
 				E90A11A22ABCF65F001C8D4F /* PokemonTableCell.swift in Sources */,
 				E90A11652ABCE302001C8D4F /* PokemonListVC.swift in Sources */,
+				E90A11AB2ABDBD53001C8D4F /* PokemonListRouter.swift in Sources */,
+				E90A11A92ABD0A6D001C8D4F /* PokemonListPresenter.swift in Sources */,
 				E90A119E2ABCF299001C8D4F /* PokemonsList.swift in Sources */,
 				E90A119C2ABCF1F6001C8D4F /* Pokemon.swift in Sources */,
 				E90A11612ABCE302001C8D4F /* AppDelegate.swift in Sources */,
 				E90A11632ABCE302001C8D4F /* SceneDelegate.swift in Sources */,
+				E90A11A72ABD00E5001C8D4F /* PokemonsListInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,6 +706,14 @@
 				minimumVersion = 5.6.0;
 			};
 		};
+		E90A11A32ABD00A3001C8D4F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -697,6 +721,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E90A11902ABCE386001C8D4F /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		E90A11A42ABD00A3001C8D4F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E90A11A32ABD00A3001C8D4F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

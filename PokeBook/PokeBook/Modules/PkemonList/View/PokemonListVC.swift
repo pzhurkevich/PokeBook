@@ -8,17 +8,23 @@
 import UIKit
 import SnapKit
 
-class PokemonListVC: UIViewController {
+
+protocol PokemonListVCProtocol: AnyObject {
+    func fillTableWithPokemons(pokemonList: PokemonsList)
+}
+
+class PokemonListVC: UIViewController, PokemonListVCProtocol {
 
     var pokemonList: PokemonsList?
     private var numberOfRows: Int = 0
+    
+    var presenter: ViewPresenterProtocol?
     
     lazy var pokemonTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        //tableView.separatorStyle = .none
-        tableView.layer.cornerRadius = 10
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(PokemonTableCell.self, forCellReuseIdentifier: PokemonTableCell.key)
         view.addSubview(tableView)
         return tableView
@@ -29,13 +35,14 @@ class PokemonListVC: UIViewController {
         view.backgroundColor = .white
         setupConstraints()
         setupNavigation()
-       
+        guard let presenter = presenter else { return }
+        presenter.loadData()
     }
     
     private func setupConstraints() {
         pokemonTableView.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(160)
-            make.top.equalToSuperview().inset(60)
+            make.top.equalToSuperview().inset(100)
             make.trailing.leading.equalToSuperview().inset(16)
         }
     }
@@ -45,7 +52,8 @@ class PokemonListVC: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         if #available(iOS 15, *) {
                let appearance = UINavigationBarAppearance()
-               appearance.configureWithOpaqueBackground()
+              // appearance.configureWithOpaqueBackground()
+            appearance.configureWithDefaultBackground()
                self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
            }
     }
@@ -66,8 +74,7 @@ class PokemonListVC: UIViewController {
 extension PokemonListVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let pokemon = pokemonList?.pokemons[indexPath.row] else { return }
-//        presenter?.showSelectedPokemon(with: pokemon, from: self)
+
     }
     
 }
@@ -76,18 +83,18 @@ extension PokemonListVC: UITableViewDelegate {
 extension PokemonListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 60
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonTableCell.key, for: indexPath) as? PokemonTableCell else { return UITableViewCell() }
 
 
-        //cell.nameLabel.text = pokemonList?.pokemons[indexPath.row].name.capitalized
+        cell.pokemonName.text = pokemonList?.pokemons[indexPath.row].name.capitalized
         return cell
     }
     
