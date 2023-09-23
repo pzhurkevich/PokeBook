@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol SinglePokemonInteractorProtocol: AnyObject {
+    
+}
+
+final class SinglePokemonInteractor: SinglePokemonInteractorProtocol {
+    
+}

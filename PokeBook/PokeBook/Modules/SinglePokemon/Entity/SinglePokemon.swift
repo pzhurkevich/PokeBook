@@ -14,11 +14,12 @@ struct SinglePokemon: Codable {
     let height: Int
     let weight: Int
     let types: [Type]
+    let sprites: Sprites
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case types = "types"
-        case height, weight
+        case height, weight, sprites
     }
 }
 
@@ -45,4 +46,15 @@ struct Info: Codable {
         case name = "name"
         case url = "url"
     }
+}
+
+
+struct Sprites: Codable {
+    let backDefault: String
+   
+    enum CodingKeys: String, CodingKey {
+        case backDefault = "back_default"
+       
+    }
+
 }

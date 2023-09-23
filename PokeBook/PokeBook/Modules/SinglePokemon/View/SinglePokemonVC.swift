@@ -9,8 +9,13 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class SinglePokemonVC: UIViewController {
-    
+protocol SinglePokemonVCProtocol: AnyObject {
+
+    func loadPokemonDetail(pokemon: SinglePokemon)
+}
+
+class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
+   
     var pokemon: Pokemon?
     
     lazy var pokemonImage: UIImageView = {
@@ -22,10 +27,37 @@ class SinglePokemonVC: UIViewController {
     
     lazy var pokemonName: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 30, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textAlignment = .center
         label.textColor = .black
         label.text = "Pokemon Name"
+        return label
+    }()
+    
+    lazy var pokemonWeight: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.textAlignment = .center
+        label.textColor = .black
+        label.text = "7 kg"
+        return label
+    }()
+    
+    lazy var pokemonHeight: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.textAlignment = .center
+        label.textColor = .black
+        label.text = "25 cm"
+        return label
+    }()
+    
+    lazy var pokemonType: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .black
+        label.text = "grass, poison "
         return label
     }()
 
@@ -34,6 +66,10 @@ class SinglePokemonVC: UIViewController {
         view.backgroundColor = .white
         view.addSubview(pokemonImage)
         view.addSubview(pokemonName)
+        view.addSubview(pokemonType)
+        view.addSubview(pokemonWeight)
+        view.addSubview(pokemonHeight)
+        
         setupConstraints()
         pokemonName.text = pokemon?.name.capitalized
         
@@ -52,7 +88,24 @@ class SinglePokemonVC: UIViewController {
             make.top.equalTo(pokemonImage.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
+        pokemonType.snp.makeConstraints { make in
+            make.top.equalTo(pokemonName.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+        
+        pokemonHeight.snp.makeConstraints { make in
+            make.top.equalTo(pokemonType.snp.bottom).offset(20)
+            make.leading.equalToSuperview().inset(40)
+        }
+        pokemonWeight.snp.makeConstraints { make in
+            make.top.equalTo(pokemonType.snp.bottom).offset(20)
+            make.trailing.equalToSuperview().inset(40)
+        }
        
+    }
+    
+    func loadPokemonDetail(pokemon: SinglePokemon) {
+        
     }
     
     func test(url: String) {
