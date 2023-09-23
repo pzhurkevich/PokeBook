@@ -1,5 +1,5 @@
 //
-//  SinglePokemonViewController.swift
+//  SinglePokemonVC.swift
 //  PokeBook
 //
 //  Created by Pavel on 23.09.23.
@@ -7,8 +7,9 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
-class SinglePokemonViewController: UIViewController {
+class SinglePokemonVC: UIViewController {
     
     var pokemon: Pokemon?
     
@@ -35,6 +36,8 @@ class SinglePokemonViewController: UIViewController {
         view.addSubview(pokemonName)
         setupConstraints()
         pokemonName.text = pokemon?.name.capitalized
+        
+        test(url: pokemon?.pokemonURL ?? "")
 
     }
     
@@ -50,6 +53,21 @@ class SinglePokemonViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
        
+    }
+    
+    func test(url: String) {
+        AF.request(url, method: .get, parameters: nil).responseDecodable(of: SinglePokemon.self) { response in
+            switch response.result {
+            case .success(let result):
+                
+                print(result)
+                
+
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
 
