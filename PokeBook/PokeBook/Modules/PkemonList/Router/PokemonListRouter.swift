@@ -36,6 +36,12 @@ class PokemonListRouter: PokemonListRouterProtocol {
     
     func createSinglePokemonModule(pokemon: Pokemon) -> UIViewController {
         let view = SinglePokemonVC()
+        let interactor = SinglePokemonInteractor()
+        let presenter = SinglePokemonPresenter()
+        view.presenter = presenter
+        presenter.view = view
+        presenter.interactor = interactor
+        interactor.presenter = presenter
         view.pokemon = pokemon
         return view
     }

@@ -17,6 +17,7 @@ protocol SinglePokemonVCProtocol: AnyObject {
 class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
    
     var pokemon: Pokemon?
+    var presenter: SPViewPresenterProtocol?
     
     lazy var pokemonImage: UIImageView = {
         let imageView  = UIImageView()
@@ -57,7 +58,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textAlignment = .center
         label.textColor = .black
-        label.text = "grass, poison "
+        label.text = "Type: "
         return label
     }()
 
@@ -72,9 +73,12 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         
         setupConstraints()
         pokemonName.text = pokemon?.name.capitalized
+        guard let singlePokemon = pokemon else {
+            print("selected pokemon is nil")
+            return
+        }
+        presenter?.loadData(pokemon: singlePokemon)
         
-        test(url: pokemon?.pokemonURL ?? "")
-
     }
     
     func setupConstraints() {
@@ -105,23 +109,17 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
     }
     
     func loadPokemonDetail(pokemon: SinglePokemon) {
-        
-    }
-    
-    func test(url: String) {
-        AF.request(url, method: .get, parameters: nil).responseDecodable(of: SinglePokemon.self) { response in
-            switch response.result {
-            case .success(let result):
-                
-                print(result)
-                
-
-                
-            case .failure(let error):
-                print(error)
-            }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self,
+                  let pokemonType = pokemon.types.first else {return}
+            
+            self.pokemonHeight.text = "Height: \(pokemon.height.description) cm"
+            self.pokemonWeight.text = "Weight: \(pokemon.weight.description) kg"
+            self.pokemonType.text = "Type: \(pokemonType.typeInfo.name)"
+           
         }
     }
+    
 
 
 }

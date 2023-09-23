@@ -29,7 +29,7 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
             switch response.result {
             case .success(let result):
                 
-                print(result)
+               // print(result)
                 
                 guard let presenter = self.presenter else { return }
                 presenter.loadedPokemonsFromAPI(pokemons: result)
