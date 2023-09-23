@@ -74,7 +74,9 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
 extension PokemonListVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.openPokemon()
+        
+        guard let singlePokemon = pokemonList?.pokemons[indexPath.row] else {return}
+        presenter?.openPokemon(pokemon: singlePokemon)
     }
     
 }

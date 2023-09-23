@@ -15,7 +15,7 @@ protocol ViewPresenterProtocol: AnyObject {
     var router: PokemonListRouterProtocol? { get set }
     
     func loadData()
-    func openPokemon()
+    func openPokemon(pokemon: Pokemon)
     
 
 }
@@ -46,9 +46,9 @@ final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterPro
         }
     }
     
-    func openPokemon() {
+    func openPokemon(pokemon: Pokemon) {
         guard let router = router else { return }
-            router.navigateToSinglePokemon()
+        router.navigateToSinglePokemon(pokemon: pokemon)
     }
     
 }

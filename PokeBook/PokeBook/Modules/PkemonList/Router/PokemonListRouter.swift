@@ -11,7 +11,7 @@ import UIKit
 protocol PokemonListRouterProtocol: AnyObject {
     var viewController: UIViewController? { get set }
     
-    func navigateToSinglePokemon()
+    func navigateToSinglePokemon(pokemon: Pokemon)
 }
 
 class PokemonListRouter: PokemonListRouterProtocol {
@@ -34,14 +34,14 @@ class PokemonListRouter: PokemonListRouterProtocol {
         return view
     }
     
-    func createSinglePokemonModule() -> UIViewController {
+    func createSinglePokemonModule(pokemon: Pokemon) -> UIViewController {
         let view = SinglePokemonViewController()
-        
+        view.pokemon = pokemon
         return view
     }
     
-    func navigateToSinglePokemon() {
-        let pokemonVC = createSinglePokemonModule()
+    func navigateToSinglePokemon(pokemon: Pokemon) {
+        let pokemonVC = createSinglePokemonModule(pokemon: pokemon)
         viewController?.navigationController?.pushViewController(pokemonVC, animated: true)
     }
     

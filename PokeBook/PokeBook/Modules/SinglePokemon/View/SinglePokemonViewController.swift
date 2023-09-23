@@ -10,6 +10,8 @@ import SnapKit
 
 class SinglePokemonViewController: UIViewController {
     
+    var pokemon: Pokemon?
+    
     lazy var pokemonImage: UIImageView = {
         let imageView  = UIImageView()
         imageView.image = UIImage(systemName: "person")
@@ -22,7 +24,7 @@ class SinglePokemonViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 30, weight: .regular)
         label.textAlignment = .center
         label.textColor = .black
-        label.text = "Name"
+        label.text = "Pokemon Name"
         return label
     }()
 
@@ -32,6 +34,7 @@ class SinglePokemonViewController: UIViewController {
         view.addSubview(pokemonImage)
         view.addSubview(pokemonName)
         setupConstraints()
+        pokemonName.text = pokemon?.name.capitalized
 
     }
     
