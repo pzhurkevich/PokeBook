@@ -42,7 +42,7 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
     private func setupConstraints() {
         pokemonTableView.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(160)
-            make.top.equalToSuperview().inset(100)
+            make.top.equalToSuperview()
             make.trailing.leading.equalToSuperview().inset(16)
         }
     }

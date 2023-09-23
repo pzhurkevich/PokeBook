@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
+import AlamofireImage
 
 protocol SinglePokemonVCProtocol: AnyObject {
 
@@ -21,8 +22,8 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
     
     lazy var pokemonImage: UIImageView = {
         let imageView  = UIImageView()
-        imageView.image = UIImage(systemName: "person")
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
+        view.addSubview(imageView)
         return imageView
     }()
     
@@ -32,6 +33,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.textAlignment = .center
         label.textColor = .black
         label.text = "Pokemon Name"
+        view.addSubview(label)
         return label
     }()
     
@@ -41,6 +43,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.textAlignment = .center
         label.textColor = .black
         label.text = "7 kg"
+        view.addSubview(label)
         return label
     }()
     
@@ -50,6 +53,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.textAlignment = .center
         label.textColor = .black
         label.text = "25 cm"
+        view.addSubview(label)
         return label
     }()
     
@@ -59,20 +63,15 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.textAlignment = .center
         label.textColor = .black
         label.text = "Type: "
+        view.addSubview(label)
         return label
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(pokemonImage)
-        view.addSubview(pokemonName)
-        view.addSubview(pokemonType)
-        view.addSubview(pokemonWeight)
-        view.addSubview(pokemonHeight)
-        
         setupConstraints()
-        pokemonName.text = pokemon?.name.capitalized
+        //pokemonName.text = pokemon?.name.capitalized
         guard let singlePokemon = pokemon else {
             print("selected pokemon is nil")
             return
@@ -85,8 +84,8 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         pokemonImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().inset(200)
-            make.width.equalTo(150)
-            make.height.equalTo(150)
+            make.width.equalTo(200)
+            make.height.equalTo(200)
         }
         pokemonName.snp.makeConstraints { make in
             make.top.equalTo(pokemonImage.snp.bottom).offset(20)
@@ -113,10 +112,13 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
             guard let self = self,
                   let pokemonType = pokemon.types.first else {return}
             
-            self.pokemonHeight.text = "Height: \(pokemon.height.description) cm"
-            self.pokemonWeight.text = "Weight: \(pokemon.weight.description) kg"
+            self.pokemonHeight.text = "Height: \(pokemon.height*10) cm"
+            self.pokemonWeight.text = "Weight: \(pokemon.weight/10) kg"
             self.pokemonType.text = "Type: \(pokemonType.typeInfo.name)"
-           
+            self.pokemonName.text = pokemon.name.capitalized
+            if let spriteURL = URL(string: pokemon.sprites.frontDefault) {
+                self.pokemonImage.af.setImage(withURL: spriteURL)
+            }
         }
     }
     

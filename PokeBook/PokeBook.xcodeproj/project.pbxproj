@@ -27,6 +27,7 @@
 		E90A11B22ABEFB09001C8D4F /* SinglePokemonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11B12ABEFB09001C8D4F /* SinglePokemonVC.swift */; };
 		E90A11B72ABF2161001C8D4F /* SinglePokemonInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11B62ABF2161001C8D4F /* SinglePokemonInteractor.swift */; };
 		E90A11B92ABF23A8001C8D4F /* SinglePokemonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11B82ABF23A8001C8D4F /* SinglePokemonPresenter.swift */; };
+		E90A11BC2ABF9EC7001C8D4F /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = E90A11BB2ABF9EC7001C8D4F /* AlamofireImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 			files = (
 				E90A11922ABCE386001C8D4F /* SnapKit in Frameworks */,
 				E90A11A52ABD00A3001C8D4F /* Alamofire in Frameworks */,
+				E90A11BC2ABF9EC7001C8D4F /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +291,7 @@
 			packageProductDependencies = (
 				E90A11912ABCE386001C8D4F /* SnapKit */,
 				E90A11A42ABD00A3001C8D4F /* Alamofire */,
+				E90A11BB2ABF9EC7001C8D4F /* AlamofireImage */,
 			);
 			productName = PokeBook;
 			productReference = E90A115D2ABCE302001C8D4F /* PokeBook.app */;
@@ -365,6 +368,7 @@
 			packageReferences = (
 				E90A11902ABCE386001C8D4F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				E90A11A32ABD00A3001C8D4F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E90A11BA2ABF9EC7001C8D4F /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 			);
 			productRefGroup = E90A115E2ABCE302001C8D4F /* Products */;
 			projectDirPath = "";
@@ -778,6 +782,14 @@
 				minimumVersion = 5.8.0;
 			};
 		};
+		E90A11BA2ABF9EC7001C8D4F /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -790,6 +802,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E90A11A32ABD00A3001C8D4F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		E90A11BB2ABF9EC7001C8D4F /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E90A11BA2ABF9EC7001C8D4F /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
