@@ -12,7 +12,11 @@ import Foundation
 protocol ViewPresenterProtocol: AnyObject {
     
     var view: PokemonListVCProtocol? { get set }
+    var router: PokemonListRouterProtocol? { get set }
+    
     func loadData()
+    func openPokemon()
+    
 
 }
 
@@ -27,7 +31,7 @@ final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterPro
     
     weak var view: PokemonListVCProtocol?
     var interactor: PokemonListInteractorProtocol?
-    var router: PokemonListRouter?
+    var router: PokemonListRouterProtocol?
     
     func loadData() {
         guard let interactor = interactor else { return }
@@ -40,6 +44,11 @@ final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterPro
             guard let view = self.view else { return }
             view.fillTableWithPokemons(pokemonList: pokemons)
         }
+    }
+    
+    func openPokemon() {
+        guard let router = router else { return }
+            router.navigateToSinglePokemon()
     }
     
 }

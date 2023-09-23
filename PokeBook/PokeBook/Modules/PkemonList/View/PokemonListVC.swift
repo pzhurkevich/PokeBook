@@ -74,7 +74,7 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
 extension PokemonListVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        presenter?.openPokemon()
     }
     
 }
@@ -97,6 +97,8 @@ extension PokemonListVC: UITableViewDataSource {
         cell.pokemonName.text = pokemonList?.pokemons[indexPath.row].name.capitalized
         return cell
     }
+    
+  
     
 }
 

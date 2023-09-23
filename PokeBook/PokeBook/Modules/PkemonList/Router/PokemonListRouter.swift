@@ -8,9 +8,15 @@
 import Foundation
 import UIKit
 
-
-class PokemonListRouter {
+protocol PokemonListRouterProtocol: AnyObject {
+    var viewController: UIViewController? { get set }
     
+    func navigateToSinglePokemon()
+}
+
+class PokemonListRouter: PokemonListRouterProtocol {
+    
+    weak var viewController: UIViewController?
     
     static func createPokemonListModule() -> UIViewController {
         
@@ -24,8 +30,21 @@ class PokemonListRouter {
         presenter.router = router
         presenter.interactor = interactor
         interactor.presenter = presenter
+        router.viewController = view
+        return view
+    }
+    
+    func createSinglePokemonModule() -> UIViewController {
+        let view = SinglePokemonViewController()
         
         return view
     }
+    
+    func navigateToSinglePokemon() {
+        let pokemonVC = createSinglePokemonModule()
+        viewController?.navigationController?.pushViewController(pokemonVC, animated: true)
+    }
+    
+   
     
 }
