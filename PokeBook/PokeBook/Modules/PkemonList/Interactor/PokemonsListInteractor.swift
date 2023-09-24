@@ -16,6 +16,7 @@ protocol PokemonListInteractorProtocol: AnyObject {
 final class PokemonListInteractor: PokemonListInteractorProtocol {
     
     weak var presenter: InteractorPresenterProtocol?
+    var database: RealmProtocol = RealmManger()
   
     func getPokemonsList() {
 
@@ -26,7 +27,9 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
             case .success(let result):
                 
                 // print(result)
-                
+                result.pokemons.forEach { pokemon in
+                    self.database.addPokemonListData(data: pokemon)
+                }
                 presenter.loadedPokemonsFromAPI(pokemons: result)
                 
             case .failure(let error):
