@@ -16,6 +16,7 @@ protocol SPViewPresenterProtocol: AnyObject {
 protocol SPInteractorProtocol: AnyObject {
     var interactor: SinglePokemonInteractorProtocol? { get set }
     func loadedPokemonInfoFromAPI(pokemonInfo: SinglePokemon)
+    func errorLoadDetailFromAPI(error: SessionError)
 }
 
 class SinglePokemonPresenter: SPViewPresenterProtocol, SPInteractorProtocol {
@@ -24,6 +25,7 @@ class SinglePokemonPresenter: SPViewPresenterProtocol, SPInteractorProtocol {
     var interactor: SinglePokemonInteractorProtocol?
     
     func loadData(pokemon: Pokemon) {
+        view?.showSpinner()
         self.loadPokemonInfo(pokemon: pokemon)
     }
     
@@ -33,5 +35,11 @@ class SinglePokemonPresenter: SPViewPresenterProtocol, SPInteractorProtocol {
     
     func loadedPokemonInfoFromAPI(pokemonInfo: SinglePokemon) {
         view?.loadPokemonDetail(pokemon: pokemonInfo)
+        view?.removeSpinner()
+        
+    }
+    
+    func errorLoadDetailFromAPI(error: SessionError) {
+        view?.errorAlert(error: error)
     }
 }
