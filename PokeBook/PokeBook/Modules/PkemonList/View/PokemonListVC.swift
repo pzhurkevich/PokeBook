@@ -20,14 +20,60 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
     
     var presenter: ViewPresenterProtocol?
     
+    var page = 1
+    
     lazy var pokemonTableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
+        tableView.isScrollEnabled = false
         tableView.register(PokemonTableCell.self, forCellReuseIdentifier: PokemonTableCell.key)
         view.addSubview(tableView)
         return tableView
+    }()
+    
+    lazy var nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Next", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
+        view.addSubview(button)
+        return button
+    }()
+    
+    lazy var previousButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Prev", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .gray
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(previousButtonAction), for: .touchUpInside)
+        button.isEnabled = false
+        view.addSubview(button)
+        return button
+    }()
+    
+    lazy var pageNumber: UILabel = {
+        let label = UILabel()
+//        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+//        label.textAlignment = .center
+//        label.textColor = .black
+//        label.text = "Type: "
+        label.backgroundColor = UIColor.black
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        label.text = "1"
+        label.layer.cornerRadius = 15
+        label.clipsToBounds = true
+
+        
+        
+        
+        view.addSubview(label)
+        return label
     }()
     
     override func viewDidLoad() {
@@ -41,9 +87,28 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
     
     private func setupConstraints() {
         pokemonTableView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(160)
+            make.bottom.equalToSuperview().inset(120)
             make.top.equalToSuperview()
             make.trailing.leading.equalToSuperview().inset(16)
+        }
+        
+        previousButton.snp.makeConstraints { make in
+            make.top.equalTo(pokemonTableView.snp.bottom).offset(20)
+            make.leading.equalToSuperview().inset(40)
+            make.height.equalTo(40)
+            make.width.equalTo(70)
+        }
+        nextButton.snp.makeConstraints { make in
+            make.top.equalTo(pokemonTableView.snp.bottom).offset(20)
+            make.trailing.equalToSuperview().inset(40)
+            make.height.equalTo(40)
+            make.width.equalTo(70)
+        }
+        pageNumber.snp.makeConstraints { make in
+            make.top.equalTo(pokemonTableView.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(30)
+            make.width.equalTo(30)
         }
     }
     
@@ -65,6 +130,33 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
             self.pokemonTableView.reloadData()
         }
     }
+    
+    @objc func nextButtonAction() {
+        
+        presenter?.nextPagePokemons()
+        
+        if Constants.offset > 0 {
+            previousButton.isEnabled = true
+            previousButton.backgroundColor = .black
+        }
+        page = page + 1
+        pageNumber.text = page.description
+    }
+    
+    @objc func previousButtonAction() {
+        
+        presenter?.previousPagePokemons()
+        
+        if Constants.offset == 0 {
+            previousButton.isEnabled = false
+            previousButton.backgroundColor = .gray
+            page = 1
+        } else {
+            previousButton.backgroundColor = .black
+            page = page - 1
+        }
+        pageNumber.text = page.description
+    }
 
    
 
@@ -85,7 +177,7 @@ extension PokemonListVC: UITableViewDelegate {
 extension PokemonListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 55
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

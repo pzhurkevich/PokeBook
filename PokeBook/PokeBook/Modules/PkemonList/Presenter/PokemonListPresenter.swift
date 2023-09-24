@@ -17,6 +17,9 @@ protocol ViewPresenterProtocol: AnyObject {
     func loadData()
     func openPokemon(pokemon: Pokemon)
     
+    func nextPagePokemons()
+    func previousPagePokemons()
+    
 
 }
 
@@ -51,4 +54,15 @@ final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterPro
         router.navigateToSinglePokemon(pokemon: pokemon)
     }
     
+    func nextPagePokemons() {
+        Constants.offset = Constants.offset + 10
+        self.loadData()
+    }
+    
+    func previousPagePokemons() {
+        if Constants.offset >= 10 {
+            Constants.offset = Constants.offset - 10
+            self.loadData()
+        }
+    }
 }
