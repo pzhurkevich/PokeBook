@@ -28,6 +28,7 @@ protocol ViewPresenterProtocol: AnyObject {
 protocol InteractorPresenterProtocol: AnyObject {
     var interactor: PokemonListInteractorProtocol? { get set }
     func loadedPokemonsFromAPI(pokemons: PokemonsList)
+    func errorLoadPokemonsFromAPI(error: SessionError)
 }
 
 final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterProtocol {
@@ -49,6 +50,10 @@ final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterPro
             view.fillTableWithPokemons(pokemonList: pokemons)
         }
         view?.removeSpinner()
+    }
+    
+    func errorLoadPokemonsFromAPI(error: SessionError) {
+        view?.errorAlert(error: error)
     }
     
     func openPokemon(pokemon: Pokemon) {

@@ -19,19 +19,32 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
   
     func getPokemonsList() {
 
-        AF.request(Constants.endpoint, method: .get, parameters: nil).responseDecodable(of: PokemonsList.self) { response in
+        AF.request(Constants.endpoint, method: .get, parameters: nil).responseDecodable(of: PokemonsList.self) { [weak self] response in
+            guard let self = self,
+                  let presenter = self.presenter else { return }
             switch response.result {
             case .success(let result):
                 
-               // print(result)
+                // print(result)
                 
-                guard let presenter = self.presenter else { return }
                 presenter.loadedPokemonsFromAPI(pokemons: result)
                 
             case .failure(let error):
-                print(error)
+
+                switch error {
+                    
+                case .responseSerializationFailed:
+                    let apiError = SessionError.invalidURL
+                    presenter.errorLoadPokemonsFromAPI(error: apiError)
+                case .sessionTaskFailed:
+                    let apiError = SessionError.connectionError
+                    presenter.errorLoadPokemonsFromAPI(error: apiError)
+                default:
+                    let apiError = SessionError.unknownError
+                    presenter.errorLoadPokemonsFromAPI(error: apiError)
+                }
             }
         }
-    
+        
     }
 }

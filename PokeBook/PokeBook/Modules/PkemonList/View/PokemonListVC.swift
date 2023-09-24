@@ -11,6 +11,7 @@ import SnapKit
 
 protocol PokemonListVCProtocol: AnyObject {
     func fillTableWithPokemons(pokemonList: PokemonsList)
+    func errorAlert(error: SessionError)
     func showSpinner()
     func removeSpinner()
 }
@@ -130,6 +131,14 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
         self.pokemonList = pokemonList
         DispatchQueue.main.async {
             self.pokemonTableView.reloadData()
+        }
+    }
+    
+    func errorAlert(error: SessionError) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: error.title, message: error.friendlyMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

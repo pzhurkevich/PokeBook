@@ -29,6 +29,7 @@
 		E90A11B92ABF23A8001C8D4F /* SinglePokemonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11B82ABF23A8001C8D4F /* SinglePokemonPresenter.swift */; };
 		E90A11BC2ABF9EC7001C8D4F /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = E90A11BB2ABF9EC7001C8D4F /* AlamofireImage */; };
 		E90A11BF2AC04105001C8D4F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11BE2AC04105001C8D4F /* Constants.swift */; };
+		E90D25FA2AC08AD2009F37DE /* SessionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D25F92AC08AD1009F37DE /* SessionErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		E90A11B62ABF2161001C8D4F /* SinglePokemonInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePokemonInteractor.swift; sourceTree = "<group>"; };
 		E90A11B82ABF23A8001C8D4F /* SinglePokemonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePokemonPresenter.swift; sourceTree = "<group>"; };
 		E90A11BE2AC04105001C8D4F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E90D25F92AC08AD1009F37DE /* SessionErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				E90A11BE2AC04105001C8D4F /* Constants.swift */,
+				E90D25F92AC08AD1009F37DE /* SessionErrors.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				E90A11612ABCE302001C8D4F /* AppDelegate.swift in Sources */,
 				E90A11632ABCE302001C8D4F /* SceneDelegate.swift in Sources */,
 				E90A11B92ABF23A8001C8D4F /* SinglePokemonPresenter.swift in Sources */,
+				E90D25FA2AC08AD2009F37DE /* SessionErrors.swift in Sources */,
 				E90A11BF2AC04105001C8D4F /* Constants.swift in Sources */,
 				E90A11B72ABF2161001C8D4F /* SinglePokemonInteractor.swift in Sources */,
 				E90A11A72ABD00E5001C8D4F /* PokemonsListInteractor.swift in Sources */,
