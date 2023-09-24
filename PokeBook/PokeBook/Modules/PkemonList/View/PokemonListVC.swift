@@ -11,6 +11,8 @@ import SnapKit
 
 protocol PokemonListVCProtocol: AnyObject {
     func fillTableWithPokemons(pokemonList: PokemonsList)
+    func showSpinner()
+    func removeSpinner()
 }
 
 class PokemonListVC: UIViewController, PokemonListVCProtocol {
@@ -21,6 +23,8 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
     var presenter: ViewPresenterProtocol?
     
     var page = 1
+    
+    var activityIndicator : UIView?
     
     lazy var pokemonTableView: UITableView = {
         let tableView = UITableView()
@@ -58,10 +62,6 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
     
     lazy var pageNumber: UILabel = {
         let label = UILabel()
-//        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-//        label.textAlignment = .center
-//        label.textColor = .black
-//        label.text = "Type: "
         label.backgroundColor = UIColor.black
         label.textColor = UIColor.white
         label.textAlignment = .center
@@ -115,6 +115,8 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
     private func setupNavigation() {
         self.title = "PokeBook"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.tintColor = .black
+
         if #available(iOS 15, *) {
                let appearance = UINavigationBarAppearance()
               // appearance.configureWithOpaqueBackground()
@@ -157,7 +159,30 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
         }
         pageNumber.text = page.description
     }
-
+    
+    func showSpinner() {
+        pokemonTableView.isHidden = true
+        previousButton.isEnabled = false
+        nextButton.isEnabled = false
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.startAnimating()
+        indicator.center = view.center
+        
+        DispatchQueue.main.async {
+            self.view.addSubview(indicator)
+        }
+        activityIndicator = indicator
+    }
+    
+    func removeSpinner() {
+           DispatchQueue.main.async {
+               self.activityIndicator?.removeFromSuperview()
+               self.activityIndicator = nil
+           }
+        pokemonTableView.isHidden = false
+        previousButton.isEnabled = true
+        nextButton.isEnabled = true
+       }
    
 
 }

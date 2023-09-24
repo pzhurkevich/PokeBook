@@ -32,7 +32,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
         label.textAlignment = .center
         label.textColor = .black
-        label.text = "Pokemon Name"
+        label.text = ""
         view.addSubview(label)
         return label
     }()
@@ -42,7 +42,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.textAlignment = .center
         label.textColor = .black
-        label.text = "7 kg"
+        label.text = ""
         view.addSubview(label)
         return label
     }()
@@ -52,7 +52,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.textAlignment = .center
         label.textColor = .black
-        label.text = "25 cm"
+        label.text = ""
         view.addSubview(label)
         return label
     }()

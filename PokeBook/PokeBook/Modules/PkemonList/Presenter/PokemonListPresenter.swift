@@ -38,6 +38,7 @@ final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterPro
     
     func loadData() {
         guard let interactor = interactor else { return }
+        view?.showSpinner()
         interactor.getPokemonsList()
     }
     
@@ -47,6 +48,7 @@ final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterPro
             guard let view = self.view else { return }
             view.fillTableWithPokemons(pokemonList: pokemons)
         }
+        view?.removeSpinner()
     }
     
     func openPokemon(pokemon: Pokemon) {
