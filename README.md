@@ -11,4 +11,4 @@ Used packages:
 ![PokemonMain](https://github.com/pzhurkevich/PokeBook/blob/main/PokemonMain.png?raw=true)
 
 
-https://github.com/pzhurkevich/PokeBook/blob/main/PokemonMain.png?raw=true
+
