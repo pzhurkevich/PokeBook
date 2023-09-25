@@ -18,11 +18,11 @@ public enum SessionError {
     var friendlyMessage: String {
         switch self {
         case .connectionError:
-            return "No Internet connection was found. Please check your Internet connection and try again."
+            return "No Internet connection was found. Please check your Internet connection and try again. Data that has already been downloaded will be shown."
         case .invalidURL:
-            return "Pokemon database error, please try again later."
+            return "Pokemon database error, please try again later. Data that has already been downloaded will be shown."
         case .unknownError:
-            return "Uncknown error, please try again later."
+            return "Uncknown error, please try again later. Data that has already been downloaded will be shown."
         }
     }
     
