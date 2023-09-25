@@ -8,4 +8,7 @@ Used packages:
 - SnapKit
 - RealmSwift
 
-![PokemonMain](https://github.com/pzhurkevich/PokeBook/assets/123979696/6617bbbe-1c65-4abb-9c0b-9eb6cbc1d092)
+![PokemonMain](https://github.com/pzhurkevich/PokeBook/blob/main/PokemonMain.png?raw=true)
+
+
+https://github.com/pzhurkevich/PokeBook/blob/main/PokemonMain.png?raw=true
