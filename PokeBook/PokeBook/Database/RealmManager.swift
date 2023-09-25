@@ -61,10 +61,7 @@ class RealmManger : RealmProtocol {
                case .failure(let error):
                    print("Failed to save image: \(error)")
                }
-
         }
-        
-        
     }
 
     
@@ -89,37 +86,4 @@ class RealmManger : RealmProtocol {
             }
         }
     }
-
-    
-//    func saveImageFromWeb(url: String, name: String, completion: @escaping (Result<URL, Error>) -> Void {
-//        let downloader = ImageDownloader()
-//        let urlRequest = URLRequest(url: URL(string: url)!)
-//        downloader.download(urlRequest, completion:  { response in
-//
-//            if case .success(let image) = response.result {
-//               self.saveImageLocally(image: image, name: name)
-//            }
-//        })
-//
-//    }
-//
-//    func saveImageLocally(image: UIImage, name: String) {
-//        guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-//            print("Error getting documents directory")
-//            return ""
-//        }
-//
-//        let fileURL = documentsDirectory.appendingPathComponent("\(name).jpg")
-//        if let data = image.jpegData(compressionQuality: 1.0) {
-//            do {
-//                try data.write(to: fileURL)
-//                print("Image saved successfully. Local URL: \(fileURL)")
-//            } catch {
-//                print("Error saving image: \(error)")
-//            }
-//        }
-//        return fileURL.absoluteString
-//    }
-
-    
 }
