@@ -17,6 +17,7 @@ protocol SinglePokemonInteractorProtocol: AnyObject {
 final class SinglePokemonInteractor: SinglePokemonInteractorProtocol {
     
     weak var presenter: SPInteractorProtocol?
+    var database: RealmProtocol = RealmManger()
     
     func getPokemonDetail(pokemon: Pokemon) {
         AF.request(pokemon.pokemonURL, method: .get, parameters: nil).responseDecodable(of: SinglePokemon.self) { [weak self] response in
@@ -24,6 +25,8 @@ final class SinglePokemonInteractor: SinglePokemonInteractorProtocol {
                   let presenter = self.presenter else { return }
             switch response.result {
             case .success(let result):
+                
+                database.addSinglePokemonDetail(data: result)
                 self.presenter?.loadedPokemonInfoFromAPI(pokemonInfo: result)
       
             case .failure(let error):

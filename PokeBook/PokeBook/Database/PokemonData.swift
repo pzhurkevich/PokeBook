@@ -14,14 +14,14 @@ class SinglePokemonDetail: Object {
     @Persisted var height: Int
     @Persisted var weight: Int
     @Persisted var type: String
-    @Persisted var image: Data
+    @Persisted var imageURL: String
 
-    convenience init(name: String, height: Int, weight: Int, type: String, image: Data) {
+    convenience init(name: String, height: Int, weight: Int, type: String, imageURL: String) {
         self.init()
         self.name = name
         self.height = height
         self.weight = weight
         self.type = type
-        self.image = image
+        self.imageURL = imageURL
     }
 }
