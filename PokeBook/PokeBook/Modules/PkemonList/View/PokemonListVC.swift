@@ -138,6 +138,10 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: error.title, message: error.friendlyMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+                guard let self = self else { return }
+                self.presenter?.loadData()
+                }))
             self.present(alert, animated: true, completion: nil)
         }
         removeSpinner()

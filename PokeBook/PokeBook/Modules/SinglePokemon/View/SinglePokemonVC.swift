@@ -192,6 +192,11 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: error.title, message: error.friendlyMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+                guard let self = self,
+                      let singlePokemon = pokemon else { return } 
+                self.presenter?.loadData(pokemon: singlePokemon)
+                }))
             self.present(alert, animated: true, completion: nil)
         }
         removeSpinner()
