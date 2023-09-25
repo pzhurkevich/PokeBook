@@ -18,6 +18,9 @@ class PokemonListRouter: PokemonListRouterProtocol {
     
     weak var viewController: UIViewController?
     
+    
+// MARK: Methods
+    
     static func createPokemonListModule() -> UIViewController {
         
         let view = PokemonListVC()

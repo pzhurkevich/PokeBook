@@ -77,6 +77,8 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
         return label
     }()
     
+// MARK: Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

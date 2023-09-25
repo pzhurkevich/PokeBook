@@ -36,6 +36,8 @@ final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterPro
     weak var view: PokemonListVCProtocol?
     var interactor: PokemonListInteractorProtocol?
     var router: PokemonListRouterProtocol?
+
+// MARK: Methods
     
     func loadData() {
         guard let interactor = interactor else { return }

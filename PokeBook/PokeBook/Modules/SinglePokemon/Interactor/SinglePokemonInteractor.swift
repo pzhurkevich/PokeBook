@@ -19,6 +19,8 @@ final class SinglePokemonInteractor: SinglePokemonInteractorProtocol {
     weak var presenter: SPInteractorProtocol?
     var database: RealmProtocol = RealmManger()
     
+// MARK: Methods
+    
     func getPokemonDetail(pokemon: Pokemon) {
         AF.request(pokemon.pokemonURL, method: .get, parameters: nil).responseDecodable(of: SinglePokemon.self) { [weak self] response in
             guard let self = self,

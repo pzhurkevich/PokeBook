@@ -7,11 +7,15 @@
 
 import Foundation
 
+// MARK: Protocol for View
+
 protocol SPViewPresenterProtocol: AnyObject {
     var view: SinglePokemonVCProtocol? { get set }
     func loadData(pokemon: Pokemon)
     
 }
+
+// MARK: Protocol for Interactor
 
 protocol SPInteractorProtocol: AnyObject {
     var interactor: SinglePokemonInteractorProtocol? { get set }
@@ -23,6 +27,8 @@ class SinglePokemonPresenter: SPViewPresenterProtocol, SPInteractorProtocol {
     
     var view: SinglePokemonVCProtocol?
     var interactor: SinglePokemonInteractorProtocol?
+    
+// MARK: Methods
     
     func loadData(pokemon: Pokemon) {
         view?.showSpinner()

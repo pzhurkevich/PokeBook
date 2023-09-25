@@ -17,7 +17,9 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
     
     weak var presenter: InteractorPresenterProtocol?
     var database: RealmProtocol = RealmManger()
-  
+    
+// MARK: Methods
+    
     func getPokemonsList() {
 
         AF.request(Constants.endpoint, method: .get, parameters: nil).responseDecodable(of: PokemonsList.self) { [weak self] response in

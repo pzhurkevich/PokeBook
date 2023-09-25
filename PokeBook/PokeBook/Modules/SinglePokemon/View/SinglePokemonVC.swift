@@ -86,12 +86,13 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         view.addSubview(label)
         return label
     }()
-
+    
+// MARK: Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupConstraints()
-        //pokemonName.text = pokemon?.name.capitalized
         guard let singlePokemon = pokemon else {
             print("selected pokemon is nil")
             return
@@ -143,10 +144,27 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self = self,
                   let pokemonType = pokemon.types.first else {return}
-            if let spriteURL = URL(string: pokemon.sprites.frontDefault) {
-                self.pokemonImage.af.setImage(withURL: spriteURL)
-                self.pokemonImageBig.af.setImage(withURL: spriteURL)
+            
+            
+            guard let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+                return
             }
+
+            let imageFileName = "\(pokemon.name).jpg"
+
+            let imageURL = documentsDirectoryURL.appendingPathComponent(imageFileName)
+
+            if let image = UIImage(contentsOfFile: imageURL.path) {
+                self.pokemonImage.image = image
+                self.pokemonImageBig.image = image
+            } else {
+                if let spriteURL = URL(string: pokemon.sprites.frontDefault) {
+                    self.pokemonImage.af.setImage(withURL: spriteURL)
+                    self.pokemonImageBig.af.setImage(withURL: spriteURL)
+                }
+            }
+
+            
             self.pokemonHeight.text = "Height: \(pokemon.height*10) cm"
             self.pokemonWeight.text = "Weight: \(pokemon.weight/10) kg"
             self.pokemonType.text = "Type: \(pokemonType.typeInfo.name)"

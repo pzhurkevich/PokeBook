@@ -18,7 +18,9 @@ protocol RealmProtocol {
 
 
 class RealmManger : RealmProtocol {
+    
     var realm = try! Realm()
+ 
     
     func addPokemonListData(data: Pokemon) {
         

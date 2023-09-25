@@ -8,6 +8,8 @@
 import Foundation
 import RealmSwift
 
+// MARK: SinglePokemon Object
+
 class SinglePokemonDetail: Object {
   
     @Persisted var name: String
