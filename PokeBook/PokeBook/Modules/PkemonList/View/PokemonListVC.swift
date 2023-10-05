@@ -44,7 +44,7 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
     
     lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Next", for: .normal)
+        button.setTitle(LocalizationAdapter.getTextFor(string: .nextButton), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 10
@@ -55,7 +55,7 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
     
     lazy var previousButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Prev", for: .normal)
+        button.setTitle(LocalizationAdapter.getTextFor(string: .prevButton), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .gray
         button.layer.cornerRadius = 10
@@ -133,7 +133,7 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: error.title, message: error.friendlyMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+            alert.addAction(UIAlertAction(title: LocalizationAdapter.getTextFor(string: .retryButton), style: .default, handler: { [weak self] _ in
                 guard let self = self else { return }
                 self.presenter?.loadData()
                 }))
