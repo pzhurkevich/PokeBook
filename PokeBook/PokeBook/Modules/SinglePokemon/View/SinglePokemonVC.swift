@@ -41,7 +41,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
     
     lazy var pokedexImage: UIImageView = {
         let imageView  = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         imageView.image = UIImage(named: "pokedex")
         view.addSubview(imageView)
         return imageView
@@ -92,6 +92,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Details"
         setupConstraints()
         guard let singlePokemon = pokemon else {
             print("selected pokemon is nil")
@@ -104,18 +105,17 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
     func setupConstraints() {
         pokedexImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(200)
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.width.equalToSuperview().inset(10)
-            make.height.equalTo(200)
+            make.height.equalToSuperview().multipliedBy(0.3)
         }
         pokemonImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(50)
-            make.top.equalToSuperview().inset(35)
-            make.width.equalTo(100)
-            make.height.equalTo(100)
+            make.centerX.equalTo(pokedexImage.snp.centerX).inset(view.frame.size.width).multipliedBy(0.5)
+            make.centerY.equalTo(pokedexImage.snp.centerY).offset(-15)
+            make.size.equalTo(100)
         }
         pokemonName.snp.makeConstraints { make in
-            make.top.equalTo(pokedexImage.snp.bottom).offset(40)
+            make.top.equalTo(pokedexImage.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
         }
         pokemonType.snp.makeConstraints { make in
@@ -135,7 +135,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
             make.top.equalTo(pokemonWeight.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().inset(20)
-            make.height.equalTo(200)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
        
     }

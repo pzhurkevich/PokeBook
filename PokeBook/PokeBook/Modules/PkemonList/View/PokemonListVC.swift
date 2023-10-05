@@ -119,13 +119,6 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
         self.title = "PokeBook"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .black
-
-        if #available(iOS 15, *) {
-               let appearance = UINavigationBarAppearance()
-              // appearance.configureWithOpaqueBackground()
-            appearance.configureWithDefaultBackground()
-               self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
-           }
     }
     
     func fillTableWithPokemons(pokemonList: PokemonsList) {
