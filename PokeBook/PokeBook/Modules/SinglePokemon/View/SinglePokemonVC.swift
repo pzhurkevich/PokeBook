@@ -166,7 +166,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
             }            
             self.pokemonHeight.text = "Height: \(pokemon.height*10) cm"
             self.pokemonWeight.text = "Weight: \(pokemon.weight/10) kg"
-            self.pokemonType.text = "Type: \(pokemonType.typeInfo.name)"
+            self.pokemonType.text = "\(LocalizationAdapter.getTextFor(string: .pokemonType)): \(pokemonType.typeInfo.name)"
             self.pokemonName.text = pokemon.name.capitalized
             
         }

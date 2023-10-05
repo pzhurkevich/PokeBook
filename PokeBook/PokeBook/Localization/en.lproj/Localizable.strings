@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  PokeBook
+
+  Created by Pavel on 5.10.23.
+  
+*/
+"pokemon_type" = "Type";
+"pokemon_height" = "Height";
+"pokemon_weight" = "Weight";

@@ -30,6 +30,8 @@
 		E90A11BC2ABF9EC7001C8D4F /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = E90A11BB2ABF9EC7001C8D4F /* AlamofireImage */; };
 		E90A11BF2AC04105001C8D4F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A11BE2AC04105001C8D4F /* Constants.swift */; };
 		E90D25FA2AC08AD2009F37DE /* SessionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D25F92AC08AD1009F37DE /* SessionErrors.swift */; };
+		E96144472ACF4178008176FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E96144492ACF4178008176FB /* Localizable.strings */; };
+		E961444C2ACF45EE008176FB /* LocalizationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961444B2ACF45EE008176FB /* LocalizationAdapter.swift */; };
 		E9BDB86F2AC0DDC70051138B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E9BDB86E2AC0DDC70051138B /* Realm */; };
 		E9BDB8712AC0DDC70051138B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9BDB8702AC0DDC70051138B /* RealmSwift */; };
 		E9BDB8742AC0DE860051138B /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BDB8732AC0DE860051138B /* RealmManager.swift */; };
@@ -79,6 +81,9 @@
 		E90A11B82ABF23A8001C8D4F /* SinglePokemonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePokemonPresenter.swift; sourceTree = "<group>"; };
 		E90A11BE2AC04105001C8D4F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E90D25F92AC08AD1009F37DE /* SessionErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionErrors.swift; sourceTree = "<group>"; };
+		E96144482ACF4178008176FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E961444A2ACF41B5008176FB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E961444B2ACF45EE008176FB /* LocalizationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationAdapter.swift; sourceTree = "<group>"; };
 		E9BDB8732AC0DE860051138B /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		E9BDB8752AC0DEC90051138B /* PokemonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonData.swift; sourceTree = "<group>"; };
 		E9BDB8772AC0DEDD0051138B /* PokemonListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListData.swift; sourceTree = "<group>"; };
@@ -137,6 +142,7 @@
 		E90A115F2ABCE302001C8D4F /* PokeBook */ = {
 			isa = PBXGroup;
 			children = (
+				E96144442ACF4139008176FB /* Localization */,
 				E9BDB8722AC0DE090051138B /* Database */,
 				E90A11BD2AC0408D001C8D4F /* Utility */,
 				E90A11942ABCEFE7001C8D4F /* Modules */,
@@ -289,6 +295,15 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		E96144442ACF4139008176FB /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				E96144492ACF4178008176FB /* Localizable.strings */,
+				E961444B2ACF45EE008176FB /* LocalizationAdapter.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		E9BDB8722AC0DE090051138B /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +407,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = E90A11542ABCE302001C8D4F;
 			packageReferences = (
@@ -417,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E90A116D2ABCE305001C8D4F /* LaunchScreen.storyboard in Resources */,
+				E96144472ACF4178008176FB /* Localizable.strings in Resources */,
 				E90A116A2ABCE305001C8D4F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,6 +472,7 @@
 				E90A11612ABCE302001C8D4F /* AppDelegate.swift in Sources */,
 				E9BDB8742AC0DE860051138B /* RealmManager.swift in Sources */,
 				E90A11632ABCE302001C8D4F /* SceneDelegate.swift in Sources */,
+				E961444C2ACF45EE008176FB /* LocalizationAdapter.swift in Sources */,
 				E90A11B92ABF23A8001C8D4F /* SinglePokemonPresenter.swift in Sources */,
 				E90D25FA2AC08AD2009F37DE /* SessionErrors.swift in Sources */,
 				E90A11BF2AC04105001C8D4F /* Constants.swift in Sources */,
@@ -504,6 +522,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		E96144492ACF4178008176FB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E96144482ACF4178008176FB /* en */,
+				E961444A2ACF41B5008176FB /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -511,6 +538,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -571,6 +599,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
