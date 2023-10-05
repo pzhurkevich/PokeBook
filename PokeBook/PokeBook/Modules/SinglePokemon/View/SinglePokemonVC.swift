@@ -99,7 +99,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Details"
+        title = LocalizationAdapter.getTextFor(string: .details)
         setupConstraints()
         guard let singlePokemon = pokemon else {
             debugPrint("selected pokemon is nil")
@@ -164,8 +164,8 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
                     self.pokemonImageBig.af.setImage(withURL: spriteURL)
                 }
             }            
-            self.pokemonHeight.text = "Height: \(pokemon.height*10) cm"
-            self.pokemonWeight.text = "Weight: \(pokemon.weight/10) kg"
+            self.pokemonHeight.text = "\(LocalizationAdapter.getTextFor(string: .pokemonHeight)): \(pokemon.height*10) cm"
+            self.pokemonWeight.text = "\(LocalizationAdapter.getTextFor(string: .pokemonWeight)): \(pokemon.weight/10) kg"
             self.pokemonType.text = "\(LocalizationAdapter.getTextFor(string: .pokemonType)): \(pokemonType.typeInfo.name)"
             self.pokemonName.text = pokemon.name.capitalized
             
@@ -195,7 +195,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: error.title, message: error.friendlyMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { [weak self] _ in
+            alert.addAction(UIAlertAction(title: LocalizationAdapter.getTextFor(string: .retryButton), style: .default, handler: { [weak self] _ in
                 guard let self = self,
                       let singlePokemon = pokemon else { return } 
                 self.presenter?.loadData(pokemon: singlePokemon)
