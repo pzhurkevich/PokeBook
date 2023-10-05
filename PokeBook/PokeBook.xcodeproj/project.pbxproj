@@ -242,7 +242,6 @@
 			children = (
 				E90A11B52ABF2138001C8D4F /* Interactor */,
 				E90A11B42ABF2127001C8D4F /* Presenter */,
-				E90A11B32ABF211F001C8D4F /* Router */,
 				E90A11B02ABEFABB001C8D4F /* View */,
 				E90A11AD2ABEC7FC001C8D4F /* Entity */,
 			);
@@ -263,13 +262,6 @@
 				E90A11B12ABEFB09001C8D4F /* SinglePokemonVC.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		E90A11B32ABF211F001C8D4F /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		E90A11B42ABF2127001C8D4F /* Presenter */ = {

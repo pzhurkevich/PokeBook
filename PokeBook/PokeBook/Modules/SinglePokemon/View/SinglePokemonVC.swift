@@ -35,7 +35,6 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         imageView.contentMode = .scaleAspectFit
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.black.cgColor
-        view.addSubview(imageView)
         return imageView
     }()
     
@@ -43,7 +42,6 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         let imageView  = UIImageView()
         imageView.contentMode = .scaleToFill
         imageView.image = UIImage(named: "pokedex")
-        view.addSubview(imageView)
         return imageView
     }()
     
@@ -53,7 +51,6 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.textAlignment = .center
         label.textColor = .black
         label.text = ""
-        view.addSubview(label)
         return label
     }()
     
@@ -63,7 +60,6 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.textAlignment = .center
         label.textColor = .black
         label.text = ""
-        view.addSubview(label)
         return label
     }()
     
@@ -73,7 +69,6 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.textAlignment = .center
         label.textColor = .black
         label.text = ""
-        view.addSubview(label)
         return label
     }()
     
@@ -83,8 +78,20 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         label.textAlignment = .center
         label.textColor = .red
         label.text = ""
-        view.addSubview(label)
         return label
+    }()
+    
+    lazy var infoContainer: UIView = {
+        let container = UIView()
+        container.addSubview(pokemonName)
+        container.addSubview(pokemonImage)
+        container.addSubview(pokemonType)
+        container.addSubview(pokemonHeight)
+        container.addSubview(pokemonWeight)
+        container.addSubview(pokemonImageBig)
+        container.addSubview(pokedexImage)
+        view.addSubview(container)
+        return container
     }()
     
 // MARK: Methods
@@ -95,14 +102,16 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         title = "Details"
         setupConstraints()
         guard let singlePokemon = pokemon else {
-            print("selected pokemon is nil")
+            debugPrint("selected pokemon is nil")
             return
         }
         presenter?.loadData(pokemon: singlePokemon)
-        
     }
     
     func setupConstraints() {
+        infoContainer.snp.makeConstraints { make in
+            make.size.equalToSuperview()
+        }
         pokedexImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).inset(10)
@@ -122,7 +131,6 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
             make.top.equalTo(pokemonName.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
-        
         pokemonHeight.snp.makeConstraints { make in
             make.top.equalTo(pokemonType.snp.bottom).offset(20)
             make.leading.equalToSuperview().inset(40)
@@ -144,16 +152,9 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         DispatchQueue.main.async { [weak self] in
             guard let self = self,
                   let pokemonType = pokemon.types.first else {return}
-            
-            
-            guard let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-                return
-            }
-
+            guard let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
             let imageFileName = "\(pokemon.name).jpg"
-
             let imageURL = documentsDirectoryURL.appendingPathComponent(imageFileName)
-
             if let image = UIImage(contentsOfFile: imageURL.path) {
                 self.pokemonImage.image = image
                 self.pokemonImageBig.image = image
@@ -162,9 +163,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
                     self.pokemonImage.af.setImage(withURL: spriteURL)
                     self.pokemonImageBig.af.setImage(withURL: spriteURL)
                 }
-            }
-
-            
+            }            
             self.pokemonHeight.text = "Height: \(pokemon.height*10) cm"
             self.pokemonWeight.text = "Weight: \(pokemon.weight/10) kg"
             self.pokemonType.text = "Type: \(pokemonType.typeInfo.name)"
@@ -174,18 +173,10 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
     }
     
     func showSpinner() {
-        pokemonName.isHidden = true
-        pokemonImage.isHidden = true
-        pokemonType.isHidden = true
-        pokemonHeight.isHidden = true
-        pokemonWeight.isHidden = true
-        pokemonImageBig.isHidden = true
-        pokedexImage.isHidden = true
-        
+        infoContainer.isHidden = true
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.startAnimating()
         indicator.center = view.center
-        
         DispatchQueue.main.async {
             self.view.addSubview(indicator)
         }
@@ -197,13 +188,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
                self.activityIndicator?.removeFromSuperview()
                self.activityIndicator = nil
            }
-        pokemonName.isHidden = false
-        pokemonImage.isHidden = false
-        pokemonType.isHidden = false
-        pokemonHeight.isHidden = false
-        pokemonWeight.isHidden = false
-        pokemonImageBig.isHidden = false
-        pokedexImage.isHidden = false
+        infoContainer.isHidden = false
        }
     
     func errorAlert(error: SessionError) {
