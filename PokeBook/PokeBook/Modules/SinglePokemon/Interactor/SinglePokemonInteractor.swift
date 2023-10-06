@@ -17,32 +17,33 @@ protocol SinglePokemonInteractorProtocol: AnyObject {
 final class SinglePokemonInteractor: SinglePokemonInteractorProtocol {
     
     weak var presenter: SPInteractorProtocol?
-    var database: RealmProtocol = RealmManger()
+    private var database: RealmProtocol = RealmManger()
+    private var apiProvider: AlamofireManagerProtocol = AlamofireManager()
     
 // MARK: Methods
     
     func getPokemonDetail(pokemon: Pokemon) {
-        AF.request(pokemon.pokemonURL, method: .get, parameters: nil).responseDecodable(of: SinglePokemon.self) { [weak self] response in
+        apiProvider.getPokemonDetail(pokemon: pokemon) { [weak self] result in
             guard let self = self,
-                  let presenter = self.presenter else { return }
-            switch response.result {
+                  let presenter = self.presenter else {return}
+            switch result {
             case .success(let result):
-                
                 database.addSinglePokemonDetail(data: result)
-                self.presenter?.loadedPokemonInfoFromAPI(pokemonInfo: result)
-      
+                presenter.loadedPokemonInfoFromAPI(pokemonInfo: result)
             case .failure(let error):
-                switch error {
-                    
-                case .responseSerializationFailed:
-                    let apiError = SessionError.invalidURL
+                let apiError: SessionError
+                if let afError = error as? AFError {
+                    switch afError {
+                    case .responseSerializationFailed:
+                        apiError = SessionError.invalidURL
+                    case .sessionTaskFailed:
+                        apiError = SessionError.connectionError
+                    default:
+                        apiError = SessionError.unknownError
+                    }
                     presenter.errorLoadDetailFromAPI(error: apiError)
-                case .sessionTaskFailed:
-                    let apiError = SessionError.connectionError
-                    presenter.errorLoadDetailFromAPI(error: apiError)
-                default:
-                    let apiError = SessionError.unknownError
-                    presenter.errorLoadDetailFromAPI(error: apiError)
+                } else {
+                    presenter.errorLoadDetailFromAPI(error: SessionError.unknownError)
                 }
             }
         }

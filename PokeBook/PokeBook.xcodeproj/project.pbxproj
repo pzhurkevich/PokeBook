@@ -32,6 +32,7 @@
 		E90D25FA2AC08AD2009F37DE /* SessionErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D25F92AC08AD1009F37DE /* SessionErrors.swift */; };
 		E96144472ACF4178008176FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E96144492ACF4178008176FB /* Localizable.strings */; };
 		E961444C2ACF45EE008176FB /* LocalizationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961444B2ACF45EE008176FB /* LocalizationAdapter.swift */; };
+		E96144502AD07219008176FB /* AlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961444F2AD07219008176FB /* AlamofireManager.swift */; };
 		E9BDB86F2AC0DDC70051138B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E9BDB86E2AC0DDC70051138B /* Realm */; };
 		E9BDB8712AC0DDC70051138B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9BDB8702AC0DDC70051138B /* RealmSwift */; };
 		E9BDB8742AC0DE860051138B /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BDB8732AC0DE860051138B /* RealmManager.swift */; };
@@ -84,6 +85,7 @@
 		E96144482ACF4178008176FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E961444A2ACF41B5008176FB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E961444B2ACF45EE008176FB /* LocalizationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationAdapter.swift; sourceTree = "<group>"; };
+		E961444F2AD07219008176FB /* AlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireManager.swift; sourceTree = "<group>"; };
 		E9BDB8732AC0DE860051138B /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		E9BDB8752AC0DEC90051138B /* PokemonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonData.swift; sourceTree = "<group>"; };
 		E9BDB8772AC0DEDD0051138B /* PokemonListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListData.swift; sourceTree = "<group>"; };
@@ -142,8 +144,8 @@
 		E90A115F2ABCE302001C8D4F /* PokeBook */ = {
 			isa = PBXGroup;
 			children = (
+				E961444D2AD071DA008176FB /* Services */,
 				E96144442ACF4139008176FB /* Localization */,
-				E9BDB8722AC0DE090051138B /* Database */,
 				E90A11BD2AC0408D001C8D4F /* Utility */,
 				E90A11942ABCEFE7001C8D4F /* Modules */,
 				E90A11932ABCEE1A001C8D4F /* App */,
@@ -289,7 +291,6 @@
 		E90A11BD2AC0408D001C8D4F /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				E90A11BE2AC04105001C8D4F /* Constants.swift */,
 				E90D25F92AC08AD1009F37DE /* SessionErrors.swift */,
 			);
 			path = Utility;
@@ -302,6 +303,24 @@
 				E961444B2ACF45EE008176FB /* LocalizationAdapter.swift */,
 			);
 			path = Localization;
+			sourceTree = "<group>";
+		};
+		E961444D2AD071DA008176FB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E961444E2AD071EA008176FB /* Network */,
+				E9BDB8722AC0DE090051138B /* Database */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E961444E2AD071EA008176FB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E961444F2AD07219008176FB /* AlamofireManager.swift */,
+				E90A11BE2AC04105001C8D4F /* Constants.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		E9BDB8722AC0DE090051138B /* Database */ = {
@@ -467,6 +486,7 @@
 				E9BDB8782AC0DEDD0051138B /* PokemonListData.swift in Sources */,
 				E90A11A92ABD0A6D001C8D4F /* PokemonListPresenter.swift in Sources */,
 				E90A119E2ABCF299001C8D4F /* PokemonsList.swift in Sources */,
+				E96144502AD07219008176FB /* AlamofireManager.swift in Sources */,
 				E90A11B22ABEFB09001C8D4F /* SinglePokemonVC.swift in Sources */,
 				E90A119C2ABCF1F6001C8D4F /* Pokemon.swift in Sources */,
 				E90A11612ABCE302001C8D4F /* AppDelegate.swift in Sources */,
