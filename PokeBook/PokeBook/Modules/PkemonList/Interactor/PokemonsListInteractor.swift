@@ -16,10 +16,9 @@ protocol PokemonListInteractorProtocol: AnyObject {
 final class PokemonListInteractor: PokemonListInteractorProtocol {
     
     weak var presenter: InteractorPresenterProtocol?
-    private var database: RealmProtocol = RealmManger()
     private var apiProvider: AlamofireManagerProtocol = AlamofireManager()
     
-// MARK: Methods
+    // MARK: Methods
     
     func getPokemonsList() {
         apiProvider.getPokemonsList { [weak self] result in
@@ -28,25 +27,30 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
             switch result {
             case .success(let data):
                 data.pokemons.forEach { pokemon in
-                self.database.addPokemonListData(data: pokemon)
+                    RealmManager.shared.addPokemonListData(data: pokemon)
                 }
                 presenter.loadedPokemonsFromAPI(pokemons: data)
             case .failure(let error):
-                let apiError: SessionError
-                if let afError = error as? AFError {
-                    switch afError {
-                    case .responseSerializationFailed:
-                        apiError = SessionError.invalidURL
-                    case .sessionTaskFailed:
-                        apiError = SessionError.connectionError
-                    default:
-                        apiError = SessionError.unknownError
-                    }
-                    presenter.errorLoadPokemonsFromAPI(error: apiError)
-                } else {
-                    presenter.errorLoadPokemonsFromAPI(error: SessionError.unknownError)
-                }
+                errorOutput(error: error)
             }
+        }
+    }
+    
+    private func errorOutput(error: Error) {
+        let apiError: SessionError
+        guard let presenter = presenter else {return}
+        if let afError = error as? AFError {
+            switch afError {
+            case .responseSerializationFailed:
+                apiError = SessionError.invalidURL
+            case .sessionTaskFailed:
+                apiError = SessionError.connectionError
+            default:
+                apiError = SessionError.unknownError
+            }
+            presenter.errorLoadPokemonsFromAPI(error: apiError)
+        } else {
+            presenter.errorLoadPokemonsFromAPI(error: SessionError.unknownError)
         }
     }
 }

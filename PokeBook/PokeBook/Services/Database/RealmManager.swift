@@ -7,31 +7,22 @@
 
 import Foundation
 import RealmSwift
-import UIKit
-import Alamofire
-
-protocol RealmProtocol {
-    func addPokemonListData(data: Pokemon)
-    func addSinglePokemonDetail(data: SinglePokemon)
-}
 
 
-
-class RealmManger : RealmProtocol {
-    
-    var realm = try! Realm()
+class RealmManager {
+    static let shared: RealmManager = RealmManager()
+    private init() {}
+    private var realm = try! Realm()
     private var apiProvider: AlamofireManagerProtocol = AlamofireManager()
     
     
     func addPokemonListData(data: Pokemon) {
         
         let savedPokemons = realm.objects(PokemonListData.self)
-        
         let listPokemonsDB = PokemonListData(name: data.name, pokemonURL: data.pokemonURL)
         do {
             try realm.write {
-                if !savedPokemons.contains(where: { pokemon in
-                    pokemon.name == data.name}) {
+                if !savedPokemons.contains(where: { $0.name == data.name }) {
                     realm.add(listPokemonsDB)
                 }
             }

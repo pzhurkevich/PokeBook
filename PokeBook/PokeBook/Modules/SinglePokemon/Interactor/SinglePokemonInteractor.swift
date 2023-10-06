@@ -17,7 +17,6 @@ protocol SinglePokemonInteractorProtocol: AnyObject {
 final class SinglePokemonInteractor: SinglePokemonInteractorProtocol {
     
     weak var presenter: SPInteractorProtocol?
-    private var database: RealmProtocol = RealmManger()
     private var apiProvider: AlamofireManagerProtocol = AlamofireManager()
     
 // MARK: Methods
@@ -28,24 +27,29 @@ final class SinglePokemonInteractor: SinglePokemonInteractorProtocol {
                   let presenter = self.presenter else {return}
             switch result {
             case .success(let result):
-                database.addSinglePokemonDetail(data: result)
+                RealmManager.shared.addSinglePokemonDetail(data: result)
                 presenter.loadedPokemonInfoFromAPI(pokemonInfo: result)
             case .failure(let error):
-                let apiError: SessionError
-                if let afError = error as? AFError {
-                    switch afError {
-                    case .responseSerializationFailed:
-                        apiError = SessionError.invalidURL
-                    case .sessionTaskFailed:
-                        apiError = SessionError.connectionError
-                    default:
-                        apiError = SessionError.unknownError
-                    }
-                    presenter.errorLoadDetailFromAPI(error: apiError)
-                } else {
-                    presenter.errorLoadDetailFromAPI(error: SessionError.unknownError)
-                }
+              errorOutput(error: error)
             }
+        }
+    }
+    
+    private func errorOutput(error: Error){
+        let apiError: SessionError
+        guard let presenter = presenter else {return}
+        if let afError = error as? AFError {
+            switch afError {
+            case .responseSerializationFailed:
+                apiError = SessionError.invalidURL
+            case .sessionTaskFailed:
+                apiError = SessionError.connectionError
+            default:
+                apiError = SessionError.unknownError
+            }
+            presenter.errorLoadDetailFromAPI(error: apiError)
+        } else {
+            presenter.errorLoadDetailFromAPI(error: SessionError.unknownError)
         }
     }
 }
