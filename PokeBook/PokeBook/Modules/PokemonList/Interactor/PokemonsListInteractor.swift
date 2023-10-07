@@ -26,9 +26,7 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
                   let presenter = self.presenter else {return}
             switch result {
             case .success(let data):
-                data.pokemons.forEach { pokemon in
-                    RealmManager.shared.addPokemonListData(data: pokemon)
-                }
+                data.pokemons.forEach { RealmManager.shared.addPokemonListData(data: $0) }
                 presenter.loadedPokemonsFromAPI(pokemons: data)
             case .failure(let error):
                 errorOutput(error: error)

@@ -185,13 +185,13 @@
 		E90A11942ABCEFE7001C8D4F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				E90A11952ABCEFFC001C8D4F /* PkemonList */,
+				E90A11952ABCEFFC001C8D4F /* PokemonList */,
 				E90A11AC2ABEC7E4001C8D4F /* SinglePokemon */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		E90A11952ABCEFFC001C8D4F /* PkemonList */ = {
+		E90A11952ABCEFFC001C8D4F /* PokemonList */ = {
 			isa = PBXGroup;
 			children = (
 				E90A119A2ABCF0EB001C8D4F /* Presenter */,
@@ -200,7 +200,7 @@
 				E90A11962ABCF035001C8D4F /* View */,
 				E90A11972ABCF07D001C8D4F /* Interactor */,
 			);
-			path = PkemonList;
+			path = PokemonList;
 			sourceTree = "<group>";
 		};
 		E90A11962ABCF035001C8D4F /* View */ = {
