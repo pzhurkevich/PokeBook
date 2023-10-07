@@ -31,21 +31,24 @@ class SinglePokemonPresenter: SPViewPresenterProtocol, SPInteractorProtocol {
 // MARK: Methods
     
     func loadData(pokemon: Pokemon) {
-        view?.showSpinner()
+        guard let view = view else {return}
+        view.showSpinner()
         self.loadPokemonInfo(pokemon: pokemon)
     }
     
     func loadPokemonInfo(pokemon: Pokemon) {
-        interactor?.getPokemonDetail(pokemon: pokemon)
+        guard let interactor = self.interactor else {return}
+        interactor.getPokemonDetail(pokemon: pokemon)
     }
     
     func loadedPokemonInfoFromAPI(pokemonInfo: SinglePokemon) {
-        view?.loadPokemonDetail(pokemon: pokemonInfo)
-        view?.removeSpinner()
-        
+        guard let view = view else {return}
+        view.loadPokemonDetail(pokemon: pokemonInfo)
+        view.removeSpinner()
     }
     
     func errorLoadDetailFromAPI(error: SessionError) {
-        view?.errorAlert(error: error)
+        guard let view = view else {return}
+        view.errorAlert(error: error)
     }
 }

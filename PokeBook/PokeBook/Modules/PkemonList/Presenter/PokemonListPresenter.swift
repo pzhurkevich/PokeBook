@@ -10,17 +10,12 @@ import Foundation
 // MARK: Protocol for View
 
 protocol ViewPresenterProtocol: AnyObject {
-    
     var view: PokemonListVCProtocol? { get set }
     var router: PokemonListRouterProtocol? { get set }
-    
     func loadData()
     func openPokemon(pokemon: Pokemon)
-    
     func nextPagePokemons()
     func previousPagePokemons()
-    
-
 }
 
 // MARK: Protocol for Interactor
@@ -40,22 +35,23 @@ final class PokemonListPresenter: ViewPresenterProtocol , InteractorPresenterPro
 // MARK: Methods
     
     func loadData() {
-        guard let interactor = interactor else { return }
-        view?.showSpinner()
+        guard let interactor = interactor,
+        let view = view else { return }
+        view.showSpinner()
         interactor.getPokemonsList()
     }
     
-    
     func loadedPokemonsFromAPI(pokemons: PokemonsList) {
+        guard let view = self.view else { return }
         DispatchQueue.main.async {
-            guard let view = self.view else { return }
             view.fillTableWithPokemons(pokemonList: pokemons)
         }
-        view?.removeSpinner()
+        view.removeSpinner()
     }
     
     func errorLoadPokemonsFromAPI(error: SessionError) {
-        view?.errorAlert(error: error)
+        guard let view = self.view else { return }
+        view.errorAlert(error: error)
     }
     
     func openPokemon(pokemon: Pokemon) {

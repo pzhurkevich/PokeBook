@@ -21,7 +21,7 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
    
     var pokemon: Pokemon?
     var presenter: SPViewPresenterProtocol?
-    var activityIndicator : UIView?
+    private var activityIndicator : UIView?
     
     lazy var pokemonImage: UIImageView = {
         let imageView  = UIImageView()
@@ -101,11 +101,12 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
         view.backgroundColor = .white
         title = LocalizationAdapter.getTextFor(string: .details)
         setupConstraints()
-        guard let singlePokemon = pokemon else {
+        guard let singlePokemon = pokemon,
+        let presenter = presenter else {
             debugPrint("selected pokemon is nil")
             return
         }
-        presenter?.loadData(pokemon: singlePokemon)
+        presenter.loadData(pokemon: singlePokemon)
     }
     
     func setupConstraints() {
@@ -184,22 +185,25 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
     }
     
     func removeSpinner() {
-           DispatchQueue.main.async {
-               self.activityIndicator?.removeFromSuperview()
+           DispatchQueue.main.async { [weak self] in
+               guard let self = self,
+               let activityIndicator = activityIndicator else { return }
+               activityIndicator.removeFromSuperview()
                self.activityIndicator = nil
            }
         infoContainer.isHidden = false
        }
     
     func errorAlert(error: SessionError) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             let alert = UIAlertController(title: error.title, message: error.friendlyMessage, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: LocalizationAdapter.getTextFor(string: .retryButton), style: .default, handler: { [weak self] _ in
-                guard let self = self,
-                      let singlePokemon = pokemon else { return } 
-                self.presenter?.loadData(pokemon: singlePokemon)
-                }))
+            alert.addAction(UIAlertAction(title: LocalizationAdapter.getTextFor(string: .retryButton), style: .default, handler: {  _ in
+                guard let singlePokemon = self.pokemon,
+                      let presenter = self.presenter else { return }
+                presenter.loadData(pokemon: singlePokemon)
+            }))
             self.present(alert, animated: true, completion: nil)
         }
         removeSpinner()
