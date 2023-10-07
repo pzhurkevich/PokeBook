@@ -182,14 +182,14 @@ class PokemonListVC: UIViewController, PokemonListVCProtocol {
     func removeSpinner() {
            DispatchQueue.main.async { [weak self] in
                guard let self = self,
-                     let activityIndicator = activityIndicator else {return}
+                     let activityIndicator = activityIndicator else { return }
                activityIndicator.removeFromSuperview()
                self.activityIndicator = nil
+               self.previousButton.isEnabled = true
+               self.nextButton.isEnabled = true
            }
         pokemonTableView.isHidden = false
-        previousButton.isEnabled = true
-        nextButton.isEnabled = true
-       }
+        }
 }
 
 // MARK: Table View Delegate
