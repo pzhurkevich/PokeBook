@@ -16,40 +16,41 @@ protocol PokemonListInteractorProtocol: AnyObject {
 final class PokemonListInteractor: PokemonListInteractorProtocol {
     
     weak var presenter: InteractorPresenterProtocol?
-    var database: RealmProtocol = RealmManger()
+    private var apiProvider: AlamofireManagerProtocol = AlamofireManager()
     
-// MARK: Methods
+    // MARK: Methods
     
     func getPokemonsList() {
-
-        AF.request(Constants.endpoint, method: .get, parameters: nil).responseDecodable(of: PokemonsList.self) { [weak self] response in
+        apiProvider.getPokemonsList { [weak self] result in
             guard let self = self,
-                  let presenter = self.presenter else { return }
-            switch response.result {
-            case .success(let result):
-                
-                // print(result)
-                result.pokemons.forEach { pokemon in
-                    self.database.addPokemonListData(data: pokemon)
+                  let presenter = self.presenter else {return}
+            switch result {
+            case .success(let data):
+                data.pokemons.forEach { pokemon in
+                    RealmManager.shared.addPokemonListData(data: pokemon)
                 }
-                presenter.loadedPokemonsFromAPI(pokemons: result)
-                
+                presenter.loadedPokemonsFromAPI(pokemons: data)
             case .failure(let error):
-
-                switch error {
-                    
-                case .responseSerializationFailed:
-                    let apiError = SessionError.invalidURL
-                    presenter.errorLoadPokemonsFromAPI(error: apiError)
-                case .sessionTaskFailed:
-                    let apiError = SessionError.connectionError
-                    presenter.errorLoadPokemonsFromAPI(error: apiError)
-                default:
-                    let apiError = SessionError.unknownError
-                    presenter.errorLoadPokemonsFromAPI(error: apiError)
-                }
+                errorOutput(error: error)
             }
         }
-        
+    }
+    
+    private func errorOutput(error: Error) {
+        let apiError: SessionError
+        guard let presenter = presenter else {return}
+        if let afError = error as? AFError {
+            switch afError {
+            case .responseSerializationFailed:
+                apiError = SessionError.invalidURL
+            case .sessionTaskFailed:
+                apiError = SessionError.connectionError
+            default:
+                apiError = SessionError.unknownError
+            }
+            presenter.errorLoadPokemonsFromAPI(error: apiError)
+        } else {
+            presenter.errorLoadPokemonsFromAPI(error: SessionError.unknownError)
+        }
     }
 }
