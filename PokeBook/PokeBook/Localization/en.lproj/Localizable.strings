@@ -16,3 +16,5 @@
 "unknownError" = "Uncknown error, please try again later. Data that has already been downloaded will be shown.";
 "errorTitle" = "Error";
 "retryButton" = "Retry";
+"cm" = "См";
+"kg" = "Кг";

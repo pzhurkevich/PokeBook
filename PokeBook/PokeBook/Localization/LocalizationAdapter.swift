@@ -19,6 +19,8 @@ enum LocalizationAdapter: String {
     case unknownError  = "unknownError"
     case errorTitle = "errorTitle"
     case retryButton = "retryButton"
+    case cm = "cm"
+    case kg = "kg"
     
     func localizedString() -> String {
         return NSLocalizedString(self.rawValue, comment: "")

@@ -165,8 +165,8 @@ class SinglePokemonVC: UIViewController, SinglePokemonVCProtocol {
                     self.pokemonImageBig.af.setImage(withURL: spriteURL)
                 }
             }            
-            self.pokemonHeight.text = "\(LocalizationAdapter.getTextFor(string: .pokemonHeight)): \(pokemon.height*10) cm"
-            self.pokemonWeight.text = "\(LocalizationAdapter.getTextFor(string: .pokemonWeight)): \(pokemon.weight/10) kg"
+            self.pokemonHeight.text = "\(LocalizationAdapter.getTextFor(string: .pokemonHeight)): \(pokemon.height*10) \(LocalizationAdapter.getTextFor(string: .cm))"
+            self.pokemonWeight.text = "\(LocalizationAdapter.getTextFor(string: .pokemonWeight)): \(pokemon.weight/10) \(LocalizationAdapter.getTextFor(string: .kg))"
             self.pokemonType.text = "\(LocalizationAdapter.getTextFor(string: .pokemonType)): \(pokemonType.typeInfo.name)"
             self.pokemonName.text = pokemon.name.capitalized
             
