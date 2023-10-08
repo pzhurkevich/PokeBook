@@ -32,6 +32,7 @@
 		E96144502AD07219008176FB /* AlamofireManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961444F2AD07219008176FB /* AlamofireManager.swift */; };
 		E96144562AD2B438008176FB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E96144552AD2B438008176FB /* Realm */; };
 		E96144582AD2BDD6008176FB /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96144572AD2BDD6008176FB /* NetworkServiceTests.swift */; };
+		E961445A2AD2CD5F008176FB /* DatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96144592AD2CD5F008176FB /* DatabaseTests.swift */; };
 		E9BDB86F2AC0DDC70051138B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E9BDB86E2AC0DDC70051138B /* Realm */; };
 		E9BDB8712AC0DDC70051138B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E9BDB8702AC0DDC70051138B /* RealmSwift */; };
 		E9BDB8742AC0DE860051138B /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BDB8732AC0DE860051138B /* RealmManager.swift */; };
@@ -75,6 +76,7 @@
 		E961444B2ACF45EE008176FB /* LocalizationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationAdapter.swift; sourceTree = "<group>"; };
 		E961444F2AD07219008176FB /* AlamofireManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireManager.swift; sourceTree = "<group>"; };
 		E96144572AD2BDD6008176FB /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		E96144592AD2CD5F008176FB /* DatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTests.swift; sourceTree = "<group>"; };
 		E9BDB8732AC0DE860051138B /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		E9BDB8752AC0DEC90051138B /* PokemonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonData.swift; sourceTree = "<group>"; };
 		E9BDB8772AC0DEDD0051138B /* PokemonListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListData.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				E96144572AD2BDD6008176FB /* NetworkServiceTests.swift */,
+				E96144592AD2CD5F008176FB /* DatabaseTests.swift */,
 			);
 			path = PokeBookTests;
 			sourceTree = "<group>";
@@ -458,6 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E961445A2AD2CD5F008176FB /* DatabaseTests.swift in Sources */,
 				E96144582AD2BDD6008176FB /* NetworkServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
