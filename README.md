@@ -1,7 +1,8 @@
 # PokeBook
 
 A simple project written using VIPER. Uploaded pokémons are saved to the local Realm database, this data can be used to run the application offline.
-Use Iphone 14 Pro simulator for normal UI rendering.
+Application is localized into Russian and English, Unit tests are included.
+
 
 Used packages:
 - Alamofire
