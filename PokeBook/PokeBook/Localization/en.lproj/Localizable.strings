@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  PokeBook
+
+  Created by Pavel on 5.10.23.
+  
+*/
+"pokemon_type" = "Type";
+"pokemon_height" = "Height";
+"pokemon_weight" = "Weight";
+"detais" = "Details";
+"prevButton" = "Prev";
+"nextButton" = "Next";
+"connectionError" = "No Internet connection was found. Please check your Internet connection and try again. Data that has already been downloaded will be shown.";
+"invalidURL" = "Pokemon database error, please try again later. Data that has already been downloaded will be shown.";
+"unknownError" = "Uncknown error, please try again later. Data that has already been downloaded will be shown.";
+"errorTitle" = "Error";
+"retryButton" = "Retry";
+"cm" = "Сm";
+"kg" = "Kg";

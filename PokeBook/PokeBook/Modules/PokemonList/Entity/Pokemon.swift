@@ -23,5 +23,4 @@ struct Pokemon: Codable {
         self.name = name
         self.pokemonURL = pokemonURL
     }
-    
 }
