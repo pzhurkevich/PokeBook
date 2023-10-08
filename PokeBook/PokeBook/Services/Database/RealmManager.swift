@@ -53,4 +53,8 @@ class RealmManager {
             }
         }
     }
+    
+    func fetchAllSavedPokemons() -> Results<PokemonListData> {
+        return realm.objects(PokemonListData.self)
+    }
 }
